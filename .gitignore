@@ -1,0 +1,25 @@
+# Environment & Secrets
+.env
+data/comment_style.md
+data/comment_style_examples.md
+data/cookies.json
+data/x.com.cookies.json
+data/*.cookies.json
+data/refresh_request.json
+data/refresh_request_processed_*.json
+data/published_log.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+.cursor/
+
+# Streamlit
+.streamlit/secrets.toml
