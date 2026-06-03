@@ -21,5 +21,9 @@ env/
 .vscode/
 .cursor/
 
+# Local demo media (do not commit)
+ScreenShot.png
+xbot-english-intro.mp4
+
 # Streamlit
 .streamlit/secrets.toml
