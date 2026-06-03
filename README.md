@@ -1,6 +1,19 @@
 # xbot — X 自动浏览评论
 
-Chrome CDP + DashScope Model 生成评论，Playwright 发布。
+**xbot** 帮你在 X（Twitter）上批量、半自动地参与中文讨论，而不必逐条手动刷帖、写评论。
+
+运行后工具会：
+
+1. 启动或连接 xbot 专用 Chrome（不影响日常浏览器），用 cookies 保持登录；
+2. 滚动浏览时间线，抓取中文帖及浏览量；
+3. 对符合条件的帖子，调用你在 `.env` 里配置的 LLM API 生成评论；
+4. 自动点击回复并发布（也可 `--dry-run` 只看生成结果、不发送）。
+
+模型通过 OpenAI 兼容接口接入（API Key、Base URL、模型名均在 `.env` 配置，可按需更换服务商）。评论风格由本地 `comment_style.md` 和范例文件定义，不会进 Git 仓库。已评论记录、手动回复同步、回复串查重等功能，用于避免对同一帖重复评论。
+
+技术栈：Chrome CDP · Playwright · OpenAI 兼容 LLM API · Python
+
+> **免责声明：** 该项目仅供技术研究与学习，因使用该脚本导致的封号风险由使用者自行承担。
 
 ## 快速开始
 
@@ -10,7 +23,7 @@ playwright install chromium
 copy .env.example .env
 ```
 
-编辑 `.env`（DashScope、cookies、CHROME_PROXY 等）。
+编辑 `.env`（LLM API、cookies、CHROME_PROXY 等）。
 
 **配置评论风格**（本地私有，默认不在仓库里）：
 
@@ -45,13 +58,6 @@ python run.py --max-comments 3
 |------|------|
 | `data/comment_style.md` | 人设、立场、语气、禁止说法（Markdown 自由写） |
 | `data/comment_style_examples.md` | few-shot 范例：「原帖大意 → 我的评论」 |
-
-仓库里提供 `*.example` 模板，首次使用：
-
-```bat
-copy data\comment_style.md.example data\comment_style.md
-copy data\comment_style_examples.md.example data\comment_style_examples.md
-```
 
 ### `comment_style.md` 写什么
 
